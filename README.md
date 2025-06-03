@@ -1,51 +1,46 @@
-# 🚦 Traffic Sign Classification with CNN
+# 🚦 Traffic Sign Classification
 
-![CNN Architecture](https://img.shields.io/badge/Architecture-CNN-blue) 
-![TensorFlow](https://img.shields.io/badge/Framework-TensorFlow%2FKeras-orange)
-![Accuracy](https://img.shields.io/badge/Best_Accuracy-98.97%25-brightgreen)
+This project implements a convolutional neural network (CNN) to classify traffic signs using the German Traffic Sign Recognition Benchmark (GTSRB). The model is built and trained with TensorFlow.
 
-A convolutional neural network (CNN) implementation for classifying traffic signs using the German Traffic Sign Recognition Benchmark (GTSRB) dataset.
+---
 
-## 📊 Performance Summary
+## 🧠 Model Architectures & Results
 
-**Best Model Achieved:**
-- ✅ **98.97%** Test Accuracy
-- ⚡ **0.0386** Test Loss 
-- ⏱️ **~3s** Inference Time
+| Model | Architecture                                                                                  | Dropout | Test Accuracy | Test Loss | Inference Time |
+|-------|-----------------------------------------------------------------------------------------------|---------|---------------|-----------|----------------|
+| **1** | `Conv(32) → Pool → Dense(128)`                                                               | ✅      | **97.02%**    | 0.1261    | ~2s            |
+| **2** | `Conv(32) → Pool → Conv(64) → Pool → Dense(128)`                                             | ✅      | **98.84%**    | 0.0555    | ~2s            |
+| **3** | `Conv(32) → Pool → Conv(64) → Pool → Dense(128) → Dropout(0.5) → Dense(128) → Dropout(0.5)` | ✅      | **97.30%**    | 0.1289    | ~2s            |
+| **4** | `Conv(32) → Pool → Conv(64) → Pool → Conv(128) → Pool → Dense(128) → Dropout(0.5)`           | ✅      | **98.86%**    | 0.0466    | ~3s            |
+| **5** | `Conv(32) → Pool → Conv(64) → Pool → Conv(128) → Pool → Dense(512) → Dropout(0.5)`           | ✅      | **98.97%**    | 0.0386    | ~3s            |
+| **6** | `Conv(32) → Pool → Conv(64) → Pool → Conv(128) → Pool → Dense(512) → Dropout(0.5) → Dense(256) → Dropout(0.5)` | ✅      | **98.12%**    | 0.0765    | ~3s            |
 
-## � Model Architectures & Results
+---
 
-| Model | Architecture | Dropout | Accuracy | Loss | Inference |
-|-------|--------------|---------|----------|------|-----------|
-| **1** | `Conv(32)→Pool→Dense(128)` | Yes | 97.02% | 0.1261 | ~2s |
-| **2** | `Conv(32)→Pool→Conv(64)→Pool→Dense(128)` | Yes | 98.84% | 0.0555 | ~2s |
-| **3** | `Conv(32)→Pool→Conv(64)→Pool→Dense(128)→Dropout→Dense(128)→Dropout` | Yes | 97.30% | 0.1289 | ~2s |
-| **4** | `Conv(32)→Pool→Conv(64)→Pool→Conv(128)→Pool→Dense(128)→Dropout` | Yes | 98.86% | 0.0466 | ~3s |
-| **5** | `Conv(32)→Pool→Conv(64)→Pool→Conv(128)→Pool→Dense(512)→Dropout` | Yes | **98.97%** | **0.0386** | ~3s |
-| **6** | `Conv(32)→Pool→Conv(64)→Pool→Conv(128)→Pool→Dense(512)→Dropout→Dense(256)→Dropout` | Yes | 98.12% | 0.0765 | ~3s |
+## 🧪 Experiment Setup
 
-## 🛠 Implementation Details
+- **Input shape:** 30 × 30 RGB images  
+- **Dataset:** German Traffic Sign Recognition Benchmark (GTSRB), organized by category folders  
+- **Train/Test split:** 60% train, 40% test  
+- **Optimizer:** Adam (default parameters)  
+- **Loss function:** Categorical Crossentropy  
+- **Activation functions:** ReLU (hidden layers), Softmax (output layer)  
+- **Normalization:** Pixel values scaled by `images / 255.0`  
+- **Epochs:** 10  
+- **Batch size:** Default  
 
-### 🧪 Experiment Setup
-| Parameter | Value |
-|-----------|-------|
-| Input Shape | 30×30 RGB |
-| Data Source | GTSRB (category folders) |
-| Train/Test Split | 60%/40% |
-| Optimizer | Adam (default) |
-| Loss Function | Categorical Crossentropy |
-| Activations | ReLU (hidden), Softmax (output) |
-| Normalization | `images / 255.0` |
-| Epochs | 10 |
-| Batch Size | Default |
+---
 
-### 📈 Key Observations
-- **Depth Matters**: Adding Conv+Pool layers significantly boosted accuracy
-- **Dropout Balance**: Effective but excessive use can hurt performance (Model 3)
-- **Efficiency**: Model 2 offers excellent accuracy (98.84%) with faster inference
-- **Top Performer**: Model 5 achieves best balance (98.97% accuracy)
+## 📈 Observations
 
-## 🗂 Project Structure
+- Increasing network depth with additional Conv and Pool layers significantly improves accuracy.  
+- Model 2 shows strong performance with just two Conv layers.  
+- Dropout helps reduce overfitting, but excessive dropout (Model 3) can slightly hurt performance.  
+- Best results achieved by Model 4, which uses 3 Conv + Pool layers and a Dense layer with dropout.
+
+---
+
+## 🗂️ Project Structure
 ```
 traffic/
 ├── traffic.py # Main training/evaluation script
