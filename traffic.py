@@ -21,13 +21,12 @@ def main():
 
     # Get image arrays and labels for all image files
     images, labels = load_data(sys.argv[1])
-    #images = images / 255.0
     # Split data into training and testing sets
     labels = tf.keras.utils.to_categorical(labels)
     x_train, x_test, y_train, y_test = train_test_split(
         np.array(images), np.array(labels), test_size=TEST_SIZE
     )
-
+    print("yay")
     # Get a compiled neural network
     model = get_model()
 
@@ -60,6 +59,7 @@ def load_data(data_dir):
                 resized_img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
                 images.append(resized_img)
                 labels.append(l)
+    images=np.array(images) / 255.0
     return (images,labels)
 
 def get_model():
@@ -78,6 +78,8 @@ def get_model():
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
     model.add(tf.keras.layers.Conv2D(64, (3, 3), activation='relu'))
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
+    model.add(tf.keras.layers.Conv2D(128, (3,3), activation='relu'))
+    model.add(tf.keras.layers.MaxPooling2D(pool_size=(2,2)))
     model.add(tf.keras.layers.Flatten())
     model.add(tf.keras.layers.Dense(128, activation='relu'))
     model.add(tf.keras.layers.Dropout(0.5))
