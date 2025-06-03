@@ -1,6 +1,6 @@
 # 🚦 Traffic Sign Classification
 
-This project implements a convolutional neural network (CNN) to classify traffic signs using the German Traffic Sign Recognition Benchmark (GTSRB). The model is built and trained using TensorFlow/Keras.
+This project implements a convolutional neural network (CNN) to classify traffic signs using the German Traffic Sign Recognition Benchmark (GTSRB). The model is built and trained using TensorFlow.
 
 ---
 
@@ -42,6 +42,6 @@ This project implements a convolutional neural network (CNN) to classify traffic
 ## 🗂️ Project Structure
 traffic/
 ├── traffic.py (Main training and evaluation script)
-├── gtsrb/ # Dataset directory (0 to NUM_CATEGORIES-1)
+├── gtsrb/ (Dataset directory (0 to NUM_CATEGORIES-1))
 ├── requirements.txt (Python dependencies)
 └── README.md (Project documentation)
